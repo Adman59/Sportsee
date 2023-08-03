@@ -1,0 +1,26 @@
+.nutriments {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    background: #FBFBFB;
+}
+
+.nutriments img {
+    width: 60px;
+    margin-right: 1.5rem;
+}
+
+.nutriments__content h2 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.nutriments__content p {
+    font-size: 0.85rem;
+    color: #74798C;
+    font-weight: 500;
+    margin: 2px 0 0;
+}

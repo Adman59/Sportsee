@@ -8,7 +8,7 @@ const PublicRouter = () => {
 
         <Routes>
             <Route element={<Layout />}>
-                <Route index element={<Home/>} />
+                <Route index element={<Home userId="18"/>} />
                 <Route path="/home" element={<Home/>} />
                 <Route path="*" element={<Not404/>}></Route> 
             </Route>

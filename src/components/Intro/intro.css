@@ -1,0 +1,16 @@
+.dashboard__intro {
+    margin-top: 4.250rem;
+    margin-bottom: 4.875rem;
+}
+
+.dashboard__intro h1 {
+    margin-top: 0
+}
+
+.dashboard__intro h1 span {
+    color: #FF0101;
+}
+
+.dashboard__intro p {
+    font-size: 18px;
+}
