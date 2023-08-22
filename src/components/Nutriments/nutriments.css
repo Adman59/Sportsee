@@ -1,11 +1,14 @@
 .nutriments {
     display: flex;
     align-items: center;
-    width: max-content;
-    padding: 2rem;
-    margin-bottom: 2rem;
+    width: auto;
+    max-width: 258px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
     border-radius: 5px;
+    border: 1px solid;
     background: #FBFBFB;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
 }
 
 .nutriments img {
@@ -22,5 +25,5 @@
     font-size: 0.85rem;
     color: #74798C;
     font-weight: 500;
-    margin: 2px 0 0;
+    margin: 8px 0 0;
 }

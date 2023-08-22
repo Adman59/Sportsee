@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: space-evenly;
     width: 117px;
-    height: 100vh;
+    height: calc(100vh - 92px);
 }
 
 .sidebar__icons {
