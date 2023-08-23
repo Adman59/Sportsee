@@ -1,11 +1,16 @@
 import React from 'react';
-import IconCalories from '@/assets/images/calories-icon.png'
-import IconProtein from '@/assets/images/protein-icon.png'
-import IconCarbs from '@/assets/images/carbs-icon.png'
-import IconFat from '@/assets/images/fat-icon.png'
-import './nutriments.css'
+import IconCalories from '@/assets/images/calories-icon.png';
+import IconProtein from '@/assets/images/protein-icon.png';
+import IconCarbs from '@/assets/images/carbs-icon.png';
+import IconFat from '@/assets/images/fat-icon.png';
+import './nutriments.css';
 
 const Nutriments = ({ info }) => {
+    if (!info || !info.keyData) {
+        // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className='dashboard__nutriments'>
             <div className='nutriments'>
