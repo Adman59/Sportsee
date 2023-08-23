@@ -52,7 +52,7 @@ const Home = ({ userId }) => {
       <Barchart />
       <Linechart />
       <Radarchart infoPerfMap={userPerformanceData.kind} infoPerf={userPerformanceData.data} />
-      <Radialbarchart />
+      <Radialbarchart info={userData} />
     </div>
   );
 };
