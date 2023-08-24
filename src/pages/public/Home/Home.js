@@ -5,7 +5,7 @@ import Barchart from '@/components/charts/Barchart/Barchart';
 import Linechart from '@/components/charts/Linechart/Linechart';
 import Radarchart from '@/components/charts/Radarchart/Radarchart';
 import Radialbarchart from '@/components/charts/Radialbarchart/Radialbarchart';
-import { getUserDataFromApi, getUserPerformanceDataFromApi, getUserActivityDataFromApi } from '@/_services/axiosAPI.js';
+import { getUserDataFromApi, getUserPerformanceDataFromApi, getUserActivityDataFromApi, getUserSessionsDataFromApi } from '@/_services/axiosAPI.js';
 import './home.css'
 
 // Pourquoi ne pas faire les appels a l'API directement dans le composant enfant ? Par exemple performances n'est nécessaire uniquement dans Radarchart
@@ -62,12 +62,28 @@ const Home = ({ userId }) => {
 
     // console.log('Données utilisateur :', userActivityData);
 
+  const [userSessionsData, setUserSessionsData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const data = await getUserSessionsDataFromApi(userId);
+            setUserSessionsData(data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des sessions utilisateur :', error);
+        }
+        };
+
+        fetchData();
+    }, [userId]);
+
+
   return (
     <div className='dashboard'>
       <Intro infoUser={userData} />
       <Nutriments infoNutriments={userData} />
       <Barchart infoActivity={userActivityData} />
-      <Linechart />
+      <Linechart infoSessions={userSessionsData}/>
       <Radarchart infoPerfMap={userPerformanceData.kind} infoPerf={userPerformanceData.data} />
       <Radialbarchart infoScore={userData} />
     </div>

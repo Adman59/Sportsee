@@ -42,7 +42,7 @@ const Barchart = ({ infoActivity }) => {
                 >
                 <CartesianGrid
                     horizontal={true}
-                    strokeDasharray="1"
+                    strokeDasharray="2"
                     vertical={false}
                 />
                 <XAxis
@@ -94,7 +94,7 @@ const Barchart = ({ infoActivity }) => {
                 />
                 <Legend
                     height={50}
-                    wrapperStyle={{ top: 0, right: 32 }}
+                    wrapperStyle={{ top: 0, right: 0 }}
                     layout="horizontal"
                     verticalAlign="top"
                     align="right"

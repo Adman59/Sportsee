@@ -1,0 +1,6 @@
+.dashboard__linechart {
+    background-color: #F00;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 5px;
+    position: relative;
+}
