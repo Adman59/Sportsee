@@ -5,10 +5,10 @@ import IconCarbs from '@/assets/images/carbs-icon.png';
 import IconFat from '@/assets/images/fat-icon.png';
 import './nutriments.css';
 
-const Nutriments = ({ info }) => {
-    if (!info || !info.keyData) {
+const Nutriments = ({ infoNutriments }) => {
+    if (!infoNutriments || !infoNutriments.keyData) {
         // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
-        return <div>Loading...</div>;
+        return <div>Erreur lors des chargements des données des nutriments...</div>;
     }
 
     return (
@@ -16,7 +16,7 @@ const Nutriments = ({ info }) => {
             <div className='nutriments'>
                 <img src={IconCalories} alt="Logo" />
                 <div className='nutriments__content'>
-                    <h2>{info.keyData.calorieCount}kCal</h2>
+                    <h2>{infoNutriments.keyData.calorieCount}kCal</h2>
                     <p>Calories</p>
                 </div>
             </div>
@@ -24,7 +24,7 @@ const Nutriments = ({ info }) => {
             <div className='nutriments'>
                 <img src={IconProtein} alt="Logo" />
                 <div className='nutriments__content'>
-                    <h2>{info.keyData.proteinCount}g</h2>
+                    <h2>{infoNutriments.keyData.proteinCount}g</h2>
                     <p>Protéines</p>
                 </div>
             </div>
@@ -32,7 +32,7 @@ const Nutriments = ({ info }) => {
             <div className='nutriments'>
                 <img src={IconCarbs} alt="Logo" />
                 <div className='nutriments__content'>
-                    <h2>{info.keyData.carbohydrateCount}g</h2>
+                    <h2>{infoNutriments.keyData.carbohydrateCount}g</h2>
                     <p>Glucides</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@ const Nutriments = ({ info }) => {
             <div className='nutriments'>
                 <img src={IconFat} alt="Logo" />
                 <div className='nutriments__content'>
-                    <h2>{info.keyData.lipidCount}g</h2>
+                    <h2>{infoNutriments.keyData.lipidCount}g</h2>
                     <p>Lipides</p>
                 </div>
             </div>

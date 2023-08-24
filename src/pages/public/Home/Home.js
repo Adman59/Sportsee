@@ -5,7 +5,7 @@ import Barchart from '@/components/charts/Barchart/Barchart';
 import Linechart from '@/components/charts/Linechart/Linechart';
 import Radarchart from '@/components/charts/Radarchart/Radarchart';
 import Radialbarchart from '@/components/charts/Radialbarchart/Radialbarchart';
-import { getUserDataFromApi, getUserPerformanceDataFromApi } from '@/_services/axiosAPI.js';
+import { getUserDataFromApi, getUserPerformanceDataFromApi, getUserActivityDataFromApi } from '@/_services/axiosAPI.js';
 import './home.css'
 
 // Pourquoi ne pas faire les appels a l'API directement dans le composant enfant ? Par exemple performances n'est nécessaire uniquement dans Radarchart
@@ -26,7 +26,7 @@ const Home = ({ userId }) => {
     fetchData();
   }, [userId]);
 
-  console.log('Données utilisateur :', userData);
+  // console.log('Données utilisateur :', userData);
 
   const [userPerformanceData, setUserPerformanceData] = useState([]);
 
@@ -43,16 +43,33 @@ const Home = ({ userId }) => {
         fetchData();
     }, [userId]);
 
-    console.log('Données utilisateur :', userPerformanceData);
+    // console.log('Données utilisateur :', userPerformanceData);
+
+  const [userActivityData, setUserActivityData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const data = await getUserActivityDataFromApi(userId);
+            setUserActivityData(data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des activités utilisateur :', error);
+        }
+        };
+
+        fetchData();
+    }, [userId]);
+
+    // console.log('Données utilisateur :', userActivityData);
 
   return (
     <div className='dashboard'>
-      <Intro info={userData} />
-      <Nutriments info={userData} />
-      <Barchart />
+      <Intro infoUser={userData} />
+      <Nutriments infoNutriments={userData} />
+      <Barchart infoActivity={userActivityData} />
       <Linechart />
       <Radarchart infoPerfMap={userPerformanceData.kind} infoPerf={userPerformanceData.data} />
-      <Radialbarchart info={userData} />
+      <Radialbarchart infoScore={userData} />
     </div>
   );
 };

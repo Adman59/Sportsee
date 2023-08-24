@@ -2,9 +2,9 @@ import React from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from 'recharts';
 import './radialbarchart.css'
 
-const Radialbarchart = ({ info }) => {
+const Radialbarchart = ({ infoScore }) => {
 
-    const score = info.score !== undefined ? info.score : info.todayScore;
+    const score = infoScore.score !== undefined ? infoScore.score : infoScore.todayScore;
 
     const data = [
         {
