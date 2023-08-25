@@ -6,81 +6,70 @@ import Linechart from '@/components/charts/Linechart/Linechart';
 import Radarchart from '@/components/charts/Radarchart/Radarchart';
 import Radialbarchart from '@/components/charts/Radialbarchart/Radialbarchart';
 import { getUserDataFromApi, getUserPerformanceDataFromApi, getUserActivityDataFromApi, getUserSessionsDataFromApi } from '@/_services/axiosAPI.js';
-import './home.css'
-
-// Pourquoi ne pas faire les appels a l'API directement dans le composant enfant ? Par exemple performances n'est nécessaire uniquement dans Radarchart
+import './home.css';
 
 const Home = ({ userId }) => {
   const [userData, setUserData] = useState([]);
+  const [userPerformanceData, setUserPerformanceData] = useState([]);
+  const [userActivityData, setUserActivityData] = useState([]);
+  const [userSessionsData, setUserSessionsData] = useState([]);
+  const [activeUserId, setActiveUserId] = useState(userId);
+
+  const toggleUser = () => {
+    setActiveUserId(activeUserId === "12" ? "18" : "12");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getUserDataFromApi(userId);
+        const data = await getUserDataFromApi(activeUserId);
         setUserData(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des données utilisateur :', error);
       }
     };
-
     fetchData();
-  }, [userId]);
+  }, [activeUserId]);
 
-  // console.log('Données utilisateur :', userData);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserPerformanceDataFromApi(activeUserId);
+        setUserPerformanceData(data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des performances utilisateur :', error);
+      }
+    };
+    fetchData();
+  }, [activeUserId]);
 
-  const [userPerformanceData, setUserPerformanceData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserActivityDataFromApi(activeUserId);
+        setUserActivityData(data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des activités utilisateur :', error);
+      }
+    };
+    fetchData();
+  }, [activeUserId]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const data = await getUserPerformanceDataFromApi(userId);
-            setUserPerformanceData(data);
-        } catch (error) {
-            console.error('Erreur lors de la récupération des performances utilisateur :', error);
-        }
-        };
-
-        fetchData();
-    }, [userId]);
-
-    // console.log('Données utilisateur :', userPerformanceData);
-
-  const [userActivityData, setUserActivityData] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const data = await getUserActivityDataFromApi(userId);
-            setUserActivityData(data);
-        } catch (error) {
-            console.error('Erreur lors de la récupération des activités utilisateur :', error);
-        }
-        };
-
-        fetchData();
-    }, [userId]);
-
-    // console.log('Données utilisateur :', userActivityData);
-
-  const [userSessionsData, setUserSessionsData] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-        try {
-            const data = await getUserSessionsDataFromApi(userId);
-            setUserSessionsData(data);
-        } catch (error) {
-            console.error('Erreur lors de la récupération des sessions utilisateur :', error);
-        }
-        };
-
-        fetchData();
-    }, [userId]);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserSessionsDataFromApi(activeUserId);
+        setUserSessionsData(data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des sessions utilisateur :', error);
+      }
+    };
+    fetchData();
+  }, [activeUserId]);
 
   return (
     <div className='dashboard'>
-      <Intro infoUser={userData} />
+      <Intro infoUser={userData} toggleUser={toggleUser}/>
       <Nutriments infoNutriments={userData} />
       <Barchart infoActivity={userActivityData} />
       <Linechart infoSessions={userSessionsData}/>

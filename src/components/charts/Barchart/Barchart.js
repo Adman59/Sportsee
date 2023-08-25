@@ -5,6 +5,7 @@ import './barchart.css'
 const Barchart = ({ infoActivity }) => {
 
     console.log('Données utilisateur :', infoActivity);
+    
 
     if (!infoActivity || !infoActivity.sessions) {
         // Les données ne sont pas encore disponibles

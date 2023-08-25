@@ -1,7 +1,7 @@
 import React from 'react';
 import './intro.css';
 
-const Intro = ({ infoUser }) => {
+const Intro = ({ infoUser, toggleUser }) => {
     if (!infoUser || !infoUser.userInfos || !infoUser.userInfos.firstName) {
         // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
         return <div>Erreur lors du chargement des données utilisateurs...</div>;
@@ -9,8 +9,13 @@ const Intro = ({ infoUser }) => {
 
     return (
         <div className='dashboard__intro'>
-           <h1>Bonjour <span>{infoUser.userInfos.firstName}</span></h1>
-           <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+            <div className="dashboard__intro__greatings">
+                <h1>Bonjour <span>{infoUser.userInfos.firstName}</span></h1>
+                <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+            </div>
+           <button className="dashboard__intro__switch" onClick={toggleUser}>
+                Changer d'utilisateur
+           </button>
         </div>
     );
 };

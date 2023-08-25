@@ -1,6 +1,8 @@
 .dashboard__intro {
     margin-top: 2rem;
-    /* margin-bottom: 2rem; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .dashboard__intro h1 {
@@ -14,3 +16,18 @@
 .dashboard__intro p {
     font-size: 18px;
 }
+
+.dashboard__intro__switch {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard__intro__switch:hover {
+    background-color: #020203;
+    color: #fff;
+    cursor: pointer;
+}
+
+
