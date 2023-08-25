@@ -6,6 +6,7 @@ import Linechart from '@/components/charts/Linechart/Linechart';
 import Radarchart from '@/components/charts/Radarchart/Radarchart';
 import Radialbarchart from '@/components/charts/Radialbarchart/Radialbarchart';
 import { getUserDataFromApi, getUserPerformanceDataFromApi, getUserActivityDataFromApi, getUserSessionsDataFromApi } from '@/_services/axiosAPI.js';
+import { getUserDataFromMock, getUserActivityDataFromMock, getUserSessionsDataFromMock, getUserPerformanceDataFromMock } from '@/_services/mockAPI.js';
 import './home.css';
 
 const Home = ({ userId }) => {
@@ -26,6 +27,9 @@ const Home = ({ userId }) => {
         setUserData(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des données utilisateur :', error);
+        // Utiliser les données de mock en cas d'échec
+        const data = await getUserDataFromMock(activeUserId);
+        setUserData(data);
       }
     };
     fetchData();
@@ -38,6 +42,9 @@ const Home = ({ userId }) => {
         setUserPerformanceData(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des performances utilisateur :', error);
+        // Utiliser les données de mock en cas d'échec
+        const data = await getUserPerformanceDataFromMock(activeUserId);
+        setUserPerformanceData(data);
       }
     };
     fetchData();
@@ -50,6 +57,9 @@ const Home = ({ userId }) => {
         setUserActivityData(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des activités utilisateur :', error);
+        // Utiliser les données de mock en cas d'échec
+        const data = await getUserActivityDataFromMock(activeUserId);
+        setUserActivityData(data);
       }
     };
     fetchData();
@@ -62,6 +72,9 @@ const Home = ({ userId }) => {
         setUserSessionsData(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des sessions utilisateur :', error);
+        // Utiliser les données de mock en cas d'échec
+        const data = await getUserSessionsDataFromMock(activeUserId);
+        setUserSessionsData(data);
       }
     };
     fetchData();
