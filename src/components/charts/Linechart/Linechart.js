@@ -42,7 +42,7 @@ const Linechart = ({ infoSessions }) => {
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                     data={data}
-                    margin={{ top: 90, right: 0, left: 0, bottom: 5 }}
+                    margin={{ top: 90, right: 0, left: 0, bottom: 48 }}
                 >
                 <CartesianGrid
                     strokeDasharray=""
@@ -54,7 +54,7 @@ const Linechart = ({ infoSessions }) => {
                   tickFormatter={formatDayOfWeek}
                   axisLine={false}
                   tickLine={false}
-                  tickMargin={0}
+                  tickMargin={42}
                   tick={{ fill: '#FFFFFF', opacity: '0.5', fontSize: '12' }}
                   padding={{ left: 16, right: 16 }}
                 />
