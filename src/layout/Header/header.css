@@ -1,3 +1,9 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 .header__menu{
     background-color: #020203;
     display: flex;
@@ -7,8 +13,7 @@
 }
 
 .link__logo img {
-    width: 100%;
-    max-width: 178px;
+    width: 178px;
 }
 
 .header__menu ul {

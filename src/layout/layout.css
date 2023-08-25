@@ -5,7 +5,13 @@
     margin: auto;
 }
 
-.layout-flex {
+/* .layout-flex {
     display: grid;
     grid-template-columns: 117px 1fr;
+} */
+
+main {
+    display: flex !important;
+    margin-left: 117px;
+    margin-top: 98px;
 }

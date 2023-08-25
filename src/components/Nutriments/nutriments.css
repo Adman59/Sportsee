@@ -1,6 +1,5 @@
 .dashboard__nutriments {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -30,4 +29,10 @@
     color: #74798C;
     font-weight: 500;
     margin: 8px 0 0;
+}
+
+@media screen and (min-width: 1400px) {
+    .dashboard__nutriments {
+        flex-direction: column;
+    }
 }

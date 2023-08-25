@@ -1,4 +1,45 @@
 .dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto 263px 263px;
+  gap: 32px 32px;
+  margin: 2rem 2rem;
+  grid-auto-flow: row;
+  justify-content: center;
+  justify-items: stretch;
+  align-items: stretch;
+  grid-template-areas:
+    "dashboard__intro dashboard__intro dashboard__intro"
+    "dashboard__nutriments dashboard__nutriments dashboard__nutriments"
+    "dashboard__barchart dashboard__barchart dashboard__barchart"
+    "dashboard__linechart dashboard__radarchart dashboard__radialbarchart";
+}
+  
+.dashboard__intro { grid-area: dashboard__intro; }
+
+.dashboard__barchart { grid-area: dashboard__barchart; }
+
+.dashboard__linechart { grid-area: dashboard__linechart; }
+
+.dashboard__radarchart { grid-area: dashboard__radarchart; }
+
+.dashboard__radialbarchart { grid-area: dashboard__radialbarchart; }
+
+.dashboard__nutriments { grid-area: dashboard__nutriments; }
+
+.title__chart {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 1200px) {
+  .dashboard {
+    margin: 2rem 4rem;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .dashboard {
     display: grid;
     grid-template-columns: 258px 258px 258px 1fr;
     grid-template-rows: auto 263px 263px;
@@ -13,21 +54,4 @@
       "dashboard__barchart dashboard__barchart dashboard__barchart dashboard__nutriments"
       "dashboard__linechart dashboard__radarchart dashboard__radialbarchart dashboard__nutriments";
   }
-  
-  .dashboard__intro { grid-area: dashboard__intro; }
-  
-  .dashboard__barchart { grid-area: dashboard__barchart; }
-  
-  .dashboard__linechart { grid-area: dashboard__linechart; }
-  
-  .dashboard__radarchart { grid-area: dashboard__radarchart; }
-  
-  .dashboard__radialbarchart { grid-area: dashboard__radialbarchart; }
-  
-  .dashboard__nutriments { grid-area: dashboard__nutriments; }
-
-  .title__chart {
-    font-size: 15px;
-    font-weight: 500;
-  }
-  
+}
