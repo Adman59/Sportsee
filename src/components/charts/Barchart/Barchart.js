@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './barchart.css'
 
 const Barchart = ({ infoActivity }) => {
@@ -33,10 +33,22 @@ const Barchart = ({ infoActivity }) => {
 
     console.log(maxCalories);
     console.log(minCalories);
+    
 
     return (
         <div className="dashboard__barchart">
-            <ResponsiveContainer width="100%" height="100%">
+            <div className="dashboard__barchart__intro">
+                <h2>Activité quotidienne</h2>
+                <ul className="dashboard__barchart__legend">
+                    <li style={{ color: '#282D30' }}>
+                        <span>Poids (kg)</span>
+                    </li>
+                    <li style={{ color: '#E60000' }}>
+                        <span>Calories brûlées (kCal)</span>
+                    </li>
+                </ul>
+            </div>
+            <ResponsiveContainer width="100%" height="70%">
                 <BarChart
                     data={data}
                 >
@@ -92,14 +104,6 @@ const Barchart = ({ infoActivity }) => {
                         return null;
                     }}
                 />
-                <Legend
-                    height={50}
-                    wrapperStyle={{ top: 0, right: 0 }}
-                    layout="horizontal"
-                    verticalAlign="top"
-                    align="right"
-                    iconType="circle"
-                />
                 <Bar
                     yAxisId="kilogram"
                     dataKey="kilogram"
@@ -114,17 +118,6 @@ const Barchart = ({ infoActivity }) => {
                     radius={[20, 20, 0, 0]}
                     fill="#E60000"
                 />
-                <text //titre du graphique "Activité quotidienne"
-                    x={0}
-                    y={0}
-                    dy={16}
-                    fontSize={15}
-                    fontWeight="500"
-                    textAnchor="start"
-                    fill="#20253A"
-                    >
-                    Activité quotidienne
-                </text>
                 </BarChart>
             </ResponsiveContainer>
         </div>

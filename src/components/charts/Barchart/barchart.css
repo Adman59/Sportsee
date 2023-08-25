@@ -5,3 +5,41 @@
     position: relative;
     padding: 1.5rem;
 }
+
+.dashboard__barchart__intro {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.dashboard__barchart__intro h2 {
+    color: #20253A;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.dashboard__barchart__legend {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard__barchart__legend li {
+    font-size: 1.5rem;
+}
+
+.dashboard__barchart__legend li:first-child {
+    margin-right: 3rem !important;
+}
+
+.dashboard__barchart__legend li::maker {
+    margin-right: 2rem;
+}
+
+.dashboard__barchart__legend li span {
+    color: #74798C;
+    font-size: 1rem;
+    font-weight: 500;
+}
