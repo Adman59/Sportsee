@@ -3,10 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import './barchart.css'
 
 const Barchart = ({ infoActivity }) => {
-
-    console.log('Données utilisateur :', infoActivity);
     
-
     if (!infoActivity || !infoActivity.sessions) {
         // Les données ne sont pas encore disponibles
         return <div>Erreur lors des chargements des données des activités...</div>;

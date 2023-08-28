@@ -5,6 +5,11 @@ import './linechart.css'
 
 const Linechart = ({ infoSessions }) => {
 
+  if (!infoSessions ) {
+    // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
+    return <div>Erreur lors du chargement des sessions utilisateurs...</div>;
+  }
+
   const data = infoSessions.sessions;
 
   const formatDayOfWeek = (day) => {

@@ -20,65 +20,109 @@ const Home = ({ userId }) => {
     setActiveUserId(activeUserId === "12" ? "18" : "12");
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getUserDataFromApi(activeUserId);
-        setUserData(data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des données utilisateur :', error);
-        // Utiliser les données de mock en cas d'échec
-        const data = await getUserDataFromMock(activeUserId);
-        setUserData(data);
-      }
-    };
-    fetchData();
-  }, [activeUserId]);
+  // useEffect Data **************************************
 
   useEffect(() => {
     const fetchData = async () => {
+      let data = null;
+      let apiError = null;
+  
+      // Tentative de récupération des données via l'API
       try {
-        const data = await getUserPerformanceDataFromApi(activeUserId);
-        setUserPerformanceData(data);
+        data = await getUserDataFromApi(activeUserId);
       } catch (error) {
-        console.error('Erreur lors de la récupération des performances utilisateur :', error);
-        // Utiliser les données de mock en cas d'échec
-        const data = await getUserPerformanceDataFromMock(activeUserId);
-        setUserPerformanceData(data);
+        apiError = error;
       }
+  
+      // Si l'API a échoué ou s'il y a une erreur, essayer de récupérer les données mockées
+      if (apiError || !data) {
+        data = getUserDataFromMock(activeUserId);
+      }
+  
+      setUserData(data);
     };
+  
     fetchData();
   }, [activeUserId]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getUserActivityDataFromApi(activeUserId);
-        setUserActivityData(data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des activités utilisateur :', error);
-        // Utiliser les données de mock en cas d'échec
-        const data = await getUserActivityDataFromMock(activeUserId);
-        setUserActivityData(data);
-      }
-    };
-    fetchData();
-  }, [activeUserId]);
+  
+  // useEffect Performances **************************************
+
 
   useEffect(() => {
     const fetchData = async () => {
+      let data = null;
+  
+      // Tentative de récupération des données de performances via l'API
       try {
-        const data = await getUserSessionsDataFromApi(activeUserId);
-        setUserSessionsData(data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des sessions utilisateur :', error);
-        // Utiliser les données de mock en cas d'échec
-        const data = await getUserSessionsDataFromMock(activeUserId);
-        setUserSessionsData(data);
+        data = await getUserPerformanceDataFromApi(activeUserId);
+      } catch (apiError) {
+        console.error('Erreur lors de la récupération des performances utilisateur via API :', apiError);
       }
+  
+      // Si l'API a échoué ou s'il y a une erreur, essayer de récupérer les données de performances mockées
+      if (!data) {
+        data = getUserPerformanceDataFromMock(activeUserId);
+      }
+  
+      setUserPerformanceData(data);
     };
+  
     fetchData();
   }, [activeUserId]);
+
+
+  // useEffect Activity **************************************
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = null;
+  
+      // Tentative de récupération des données d'activités' via l'API
+      try {
+        data = await getUserActivityDataFromApi(activeUserId);
+      } catch (apiError) {
+        console.error('Erreur lors de la récupération des activités utilisateur via API :', apiError);
+      }
+  
+      // Si l'API a échoué ou s'il y a une erreur, essayer de récupérer les données de activités mockées
+      if (!data) {
+        data = getUserActivityDataFromMock(activeUserId);
+      }
+  
+      setUserActivityData(data);
+    };
+  
+    fetchData();
+  }, [activeUserId]);
+
+
+  // useEffect Sessions **************************************
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = null;
+  
+      // Tentative de récupération des données de sessions via l'API
+      try {
+        data = await getUserSessionsDataFromApi(activeUserId);
+      } catch (apiError) {
+        console.error('Erreur lors de la récupération des sessions utilisateur via API :', apiError);
+      }
+  
+      // Si l'API a échoué ou s'il y a une erreur, essayer de récupérer les données des sessions mockées
+      if (!data) {
+        data = getUserSessionsDataFromMock(activeUserId);
+      }
+  
+      setUserSessionsData(data);
+    };
+  
+    fetchData();
+  }, [activeUserId]);
+
 
   return (
     <div className='dashboard'>

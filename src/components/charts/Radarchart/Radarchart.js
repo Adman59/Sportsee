@@ -4,6 +4,11 @@ import './radarchart.css'
 
 const Radarchart = ({ infoPerfMap, infoPerf }) => {
 
+    if (!infoPerfMap || !infoPerf ) {
+        // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
+        return <div>Erreur lors du chargement des données physiques utilisateurs...</div>;
+    }
+
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
