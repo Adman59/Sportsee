@@ -1,5 +1,6 @@
 import React from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from 'recharts';
+import { RadialChartModel } from "@/models/RadialChart_Model";
 import './radialbarchart.css'
 
 const Radialbarchart = ({ infoScore }) => {
@@ -9,15 +10,15 @@ const Radialbarchart = ({ infoScore }) => {
         return <div>Erreur lors du chargement des scores utilisateurs...</div>;
     }
 
-    const score = infoScore.score !== undefined ? infoScore.score : infoScore.todayScore;
+    const radialChartData = new RadialChartModel(infoScore);
 
     const data = [
         {
             name: 'Score',
-            uv: score * 100, // C'est le pourcentage de ma barre rouge (ici 30% car on reprend le score de l'id 18 de 0.3)
+            uv: radialChartData.todayScore,
             fill: '#FF0101',
         },
-      ];
+    ];
 
     return (
         <div className="dashboard__radialbarchart">
@@ -42,7 +43,7 @@ const Radialbarchart = ({ infoScore }) => {
                 />
                 <text x="50%" y="50%" textAnchor="middle" fontSize={16}>
                     <tspan  x="55%" dy="0em" textAnchor="middle" fontSize="26px" fontWeight="bold">
-                    {`${score * 100}%`}
+                    {`${radialChartData.todayScore}%`}
                     </tspan>
                     <tspan x="55%" dy="1.5em" textAnchor="middle" fontSize="16px" fill="#74798C" fontWeight={500}>
                     de votre

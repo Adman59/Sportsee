@@ -16,6 +16,24 @@ const Home = ({ userId }) => {
   const [userSessionsData, setUserSessionsData] = useState([]);
   const [activeUserId, setActiveUserId] = useState(userId);
 
+
+
+
+// const getinfo = () => {
+//   const data= await getUserDataFromApi(activeUserId)
+
+//   if (!data){
+//     //on affiche un message d'erreur 
+  
+//   } else {
+//     const datamain = await getUserDataFromApi(activeUserId)
+//     const datasession = await getUserDataFromApi(activeUserId)
+//     const dataacitivy = await getUserDataFromApi(activeUserId)
+//   }
+// }
+
+
+
   const toggleUser = () => {
     setActiveUserId(activeUserId === "12" ? "18" : "12");
   };
