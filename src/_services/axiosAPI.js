@@ -1,6 +1,6 @@
 import axios from "axios";
-import {BarChartModel} from "@/models/BarChart_Model";
-import {RadialChartModel} from "@/models/RadialChart_Model";
+import { BarChartModel } from "@/models/BarChart_Model";
+import { RadialChartModel } from "@/models/RadialChart_Model";
 import { LineChartModel } from "@/models/LineChart_Model";
 import { RadarChartModel } from "@/models/RadarChart_Model";
 
@@ -10,6 +10,7 @@ export const getUserDataFromApi = async (userId) => {
 
         if(response.ok){
             const data = await response.json();
+            console.log(data);
             if(data){
                 return new RadialChartModel(data.data);
             }

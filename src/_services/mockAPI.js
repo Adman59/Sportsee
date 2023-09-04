@@ -3,7 +3,11 @@ import {
     USER_ACTIVITY,
     USER_AVERAGE_SESSIONS,
     USER_PERFORMANCE,
-  } from '@/mock/mockdata.js';
+} from '@/mock/mockdata.js';
+import { BarChartModel } from "@/models/BarChart_Model";
+import { RadialChartModel } from "@/models/RadialChart_Model";
+import { LineChartModel } from "@/models/LineChart_Model";
+import { RadarChartModel } from "@/models/RadarChart_Model";
 
   
 export const getUserDataFromMock = (userId) => {

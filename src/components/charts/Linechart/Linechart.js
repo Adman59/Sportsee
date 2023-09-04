@@ -6,7 +6,7 @@ import './linechart.css'
 
 const Linechart = ({ infoSessions }) => {
 
-  if (!infoSessions ) {
+  if (!infoSessions || !infoSessions.sessions ) {
     // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
     return <div>Erreur lors du chargement des sessions utilisateurs...</div>;
   }
@@ -55,7 +55,6 @@ const Linechart = ({ infoSessions }) => {
                 />
                 <XAxis
                   dataKey="name"
-                  // tickFormatter={formatDayOfWeek}
                   axisLine={false}
                   tickLine={false}
                   tickMargin={42}

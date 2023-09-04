@@ -4,51 +4,36 @@ import { RadarChartModel } from "@/models/RadarChart_Model";
 import './radarchart.css'
 
 const Radarchart = ({ infoPerfMap, infoPerf }) => {
-
-    if (!infoPerfMap || !infoPerf ) {
+    if (!infoPerfMap || !infoPerf || !infoPerf.kind || !infoPerf.data) {
         // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
         return <div>Erreur lors du chargement des données physiques utilisateurs...</div>;
     }
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
-    // Utilisez la classe RadarChartModel pour formater les données infoPerf
-    const formattedData = Array.isArray(infoPerf)
-        ? infoPerf.map((item) => new RadarChartModel(item))
-        : [];
-
-    // Transformez les données formatées en données adaptées au composant RadarChart
-    const transformedData = formattedData.map((item) => ({
-        subject: capitalizeFirstLetter(infoPerfMap[item.kind]),
-        key: item.kind,
-        fullMark: item.performanceData[0].value, // Assurez-vous d'ajuster en fonction de la structure des données
-    }));
+    const RadarChartData = new RadarChartModel(infoPerf);
 
     return (
         <div className="dashboard__radarchart">
             <ResponsiveContainer width="100%" height="100%">
-            <RadarChart
-                data={transformedData}
-                cx="50%" cy="50%" outerRadius="60%"
-            >
-                <PolarGrid 
-                    gridType='polygon'
-                    radialLines={false}
-                />
-                <PolarAngleAxis
-                    dataKey="subject"
-                    tick={{ fill: "white", fontSize: 12, fontWeight: 500 }} 
-                />
-                <PolarRadiusAxis tick={false} axisLine={false} />  
-                <Radar
-                    dataKey="fullMark"
-                    stroke="#FF0000"
-                    fill="#FF0000"
-                    fillOpacity={0.6}
-                />
-            </RadarChart>
+                <RadarChart
+                    data={RadarChartData.performance}
+                    cx="50%" cy="50%" outerRadius="60%"
+                >
+                    <PolarGrid
+                        gridType='polygon'
+                        radialLines={false}
+                    />
+                    <PolarAngleAxis
+                        dataKey="kind"
+                        tick={{ fill: "white", fontSize: 11, fontWeight: 500 }}
+                    />
+                    <PolarRadiusAxis tick={false} axisLine={false} />
+                    <Radar
+                        dataKey="value"
+                        stroke="#FF0000"
+                        fill="#FF0000"
+                        fillOpacity={0.6}
+                    />
+                </RadarChart>
             </ResponsiveContainer>
         </div>
     );
