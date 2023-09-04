@@ -12,6 +12,7 @@ const Nutriments = ({ infoNutriments }) => {
         return <div>Erreur lors des chargements des données des nutriments...</div>;
     }
 
+    // On récupère les données de l'API formatées grâce aux models 
     const radialChartData = new RadialChartModel(infoNutriments);
 
     return (

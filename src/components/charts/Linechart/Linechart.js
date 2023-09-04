@@ -1,5 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
+import { LineChartModel } from "@/models/LineChart_Model";
 import './linechart.css'
 
 
@@ -10,12 +11,10 @@ const Linechart = ({ infoSessions }) => {
     return <div>Erreur lors du chargement des sessions utilisateurs...</div>;
   }
 
-  const data = infoSessions.sessions;
+  // On récupère les données de l'API formatées grâce aux models 
+  const LineChartData = new LineChartModel(infoSessions);
+  const data = LineChartData.sessions;
 
-  const formatDayOfWeek = (day) => {
-    const daysOfWeek = ["L", "M", "M", "J", "V", "S", "D"];
-    return daysOfWeek[day - 1];
-  };
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -55,8 +54,8 @@ const Linechart = ({ infoSessions }) => {
                     horizontal={false}
                 />
                 <XAxis
-                  dataKey="day"
-                  tickFormatter={formatDayOfWeek}
+                  dataKey="name"
+                  // tickFormatter={formatDayOfWeek}
                   axisLine={false}
                   tickLine={false}
                   tickMargin={42}

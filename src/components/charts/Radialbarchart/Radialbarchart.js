@@ -10,6 +10,7 @@ const Radialbarchart = ({ infoScore }) => {
         return <div>Erreur lors du chargement des scores utilisateurs...</div>;
     }
 
+    // On récupère les données de l'API formatées grâce aux models 
     const radialChartData = new RadialChartModel(infoScore);
 
     const data = [

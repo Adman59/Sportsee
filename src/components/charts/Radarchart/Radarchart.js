@@ -1,5 +1,6 @@
 import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { RadarChartModel } from "@/models/RadarChart_Model";
 import './radarchart.css'
 
 const Radarchart = ({ infoPerfMap, infoPerf }) => {
@@ -13,11 +14,17 @@ const Radarchart = ({ infoPerfMap, infoPerf }) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
-    const transformedData = Array.isArray(infoPerf) ? infoPerf.map(item => ({
-        subject: capitalizeFirstLetter(infoPerfMap[item.kind]), 
+    // Utilisez la classe RadarChartModel pour formater les données infoPerf
+    const formattedData = Array.isArray(infoPerf)
+        ? infoPerf.map((item) => new RadarChartModel(item))
+        : [];
+
+    // Transformez les données formatées en données adaptées au composant RadarChart
+    const transformedData = formattedData.map((item) => ({
+        subject: capitalizeFirstLetter(infoPerfMap[item.kind]),
         key: item.kind,
-        fullMark: item.value
-    })) : [];
+        fullMark: item.performanceData[0].value, // Assurez-vous d'ajuster en fonction de la structure des données
+    }));
 
     return (
         <div className="dashboard__radarchart">

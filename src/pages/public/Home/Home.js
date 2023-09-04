@@ -70,16 +70,17 @@ const Home = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       let data = null;
+      let apiError = null;
   
       // Tentative de récupération des données de performances via l'API
       try {
         data = await getUserPerformanceDataFromApi(activeUserId);
-      } catch (apiError) {
-        console.error('Erreur lors de la récupération des performances utilisateur via API :', apiError);
+      } catch (error) {
+        apiError = error;
       }
   
       // Si l'API a échoué ou s'il y a une erreur, essayer de récupérer les données de performances mockées
-      if (!data) {
+      if (apiError || !data) {
         data = getUserPerformanceDataFromMock(activeUserId);
       }
   
@@ -122,16 +123,17 @@ const Home = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       let data = null;
+      let apiError = null;
   
       // Tentative de récupération des données de sessions via l'API
       try {
         data = await getUserSessionsDataFromApi(activeUserId);
-      } catch (apiError) {
-        console.error('Erreur lors de la récupération des sessions utilisateur via API :', apiError);
+      } catch (error) {
+        apiError = error;
       }
   
       // Si l'API a échoué ou s'il y a une erreur, essayer de récupérer les données des sessions mockées
-      if (!data) {
+      if (apiError || !data) {
         data = getUserSessionsDataFromMock(activeUserId);
       }
   
@@ -148,7 +150,7 @@ const Home = ({ userId }) => {
       <Nutriments infoNutriments={userData} />
       <Barchart infoActivity={userActivityData} />
       <Linechart infoSessions={userSessionsData}/>
-      <Radarchart infoPerfMap={userPerformanceData.kind} infoPerf={userPerformanceData.data} />
+      {/* <Radarchart infoPerfMap={userPerformanceData.kind} infoPerf={userPerformanceData.data} /> */}
       <Radialbarchart infoScore={userData} />
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChartModel } from "@/models/BarChart_Model";
 import './barchart.css'
 
 const Barchart = ({ infoActivity }) => {
@@ -9,7 +10,9 @@ const Barchart = ({ infoActivity }) => {
         return <div>Erreur lors des chargements des données des activités...</div>;
     }
 
-    const data = infoActivity.sessions;
+    // On récupère les données de l'API formatées grâce aux models 
+    const barChartData = new BarChartModel(infoActivity);
+    const data = barChartData.dataModel;
 
     const formatDate = (date) => {
         const formattedDate = new Date(date); //new pour créer un nouvel objet date
@@ -28,9 +31,6 @@ const Barchart = ({ infoActivity }) => {
     const maxCalories = Math.max(...data.map((sessions) => sessions.calories)); //Math.max pour trouver la valeur maximale
 
     const minCalories = Math.min(...data.map((sessions) => sessions.calories)); //Math.min pour trouver la valeur minimale
-
-    console.log(maxCalories);
-    console.log(minCalories);
     
 
     return (
