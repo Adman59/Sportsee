@@ -25,37 +25,34 @@ const Home = ({ userId }) => {
   const [userActivityData, setUserActivityData] = useState([]);
   const [userSessionsData, setUserSessionsData] = useState([]);
   const [activeUserId, setActiveUserId] = useState(userId);
+  const [statevalueapi, setstatevalueapi] = useState(false);
 
   const fetchData = async (userId) => {
     try {
       const userDataApi = await getUserDataFromApi(userId);
-      const userPerformanceDataApi = await getUserPerformanceDataFromApi(userId);
-      const userActivityDataApi = await getUserActivityDataFromApi(userId);
-      const userSessionsDataApi = await getUserSessionsDataFromApi(userId);
-
+      
       if (userDataApi) {
         setUserData(userDataApi);
+
+        const userPerformanceDataApi = await getUserPerformanceDataFromApi(userId);
+        const userActivityDataApi = await getUserActivityDataFromApi(userId);
+        const userSessionsDataApi = await getUserSessionsDataFromApi(userId);
+
+        if (userPerformanceDataApi || userActivityDataApi || userSessionsDataApi) {
+          setUserPerformanceData(userPerformanceDataApi);
+          setUserActivityData(userActivityDataApi);
+          setUserSessionsData(userSessionsDataApi);
+          setstatevalueapi(true)
+        } else {
+          setstatevalueapi(false)
+        }
       } else {
-        setUserData(getUserDataFromMock(userId));
+        setstatevalueapi(false)
       }
 
-      if (userPerformanceDataApi) {
-        setUserPerformanceData(userPerformanceDataApi);
-      } else {
-        setUserPerformanceData(getUserPerformanceDataFromMock(userId));
-      }
+      
 
-      if (userActivityDataApi) {
-        setUserActivityData(userActivityDataApi);
-      } else {
-        setUserActivityData(getUserActivityDataFromMock(userId));
-      }
-
-      if (userSessionsDataApi) {
-        setUserSessionsData(userSessionsDataApi);
-      } else {
-        setUserSessionsData(getUserSessionsDataFromMock(userId));
-      }
+      
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
     }
@@ -69,6 +66,8 @@ const Home = ({ userId }) => {
     setActiveUserId(activeUserId === '12' ? '18' : '12');
   };
 
+  if(statevalueapi) return (<h2>Il y à une erreur sur la récupération des données.</h2>)
+  
   return (
     <div className="dashboard">
       <Intro infoUser={userData} toggleUser={toggleUser} />

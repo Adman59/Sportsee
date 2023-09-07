@@ -33,6 +33,5 @@ export const getUserSessionsDataFromMock = (userId) => {
   
 export const getUserPerformanceDataFromMock = (userId) => {
     const userPerformance = USER_PERFORMANCE.find((user) => user.userId == userId);
-    console.log(userPerformance);
     return userPerformance;
 };
