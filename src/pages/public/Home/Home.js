@@ -33,6 +33,8 @@ const Home = ({ userId }) => {
       const userActivityDataApi = await getUserActivityDataFromApi(userId);
       const userSessionsDataApi = await getUserSessionsDataFromApi(userId);
 
+      console.log(userActivityDataApi);
+
       if (userDataApi) {
         setUserData(userDataApi);
       } else {
@@ -75,7 +77,7 @@ const Home = ({ userId }) => {
       <Nutriments infoNutriments={userData} />
       <Barchart infoActivity={userActivityData} />
       <Linechart infoSessions={userSessionsData} />
-      <Radarchart infoPerfMap={userPerformanceData} infoPerf={userPerformanceData} />
+      <Radarchart infoPerf={userPerformanceData} />
       <Radialbarchart infoScore={userData} /> 
     </div>
   );

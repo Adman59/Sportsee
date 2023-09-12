@@ -1,22 +1,19 @@
 import React from 'react';
 import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from 'recharts';
-import { RadialChartModel } from "@/models/RadialChart_Model";
 import './radialbarchart.css'
 
 const Radialbarchart = ({ infoScore }) => {
 
-    if (!infoScore || !infoScore.userInfos ) {
+
+    if (!infoScore) {
         // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
         return <div>Erreur lors du chargement des scores utilisateurs...</div>;
     }
 
-    // On récupère les données de l'API formatées grâce aux models 
-    const radialChartData = new RadialChartModel(infoScore);
-
     const data = [
         {
             name: 'Score',
-            uv: radialChartData.todayScore,
+            uv: infoScore.todayScore,
             fill: '#FF0101',
         },
     ];
@@ -44,7 +41,7 @@ const Radialbarchart = ({ infoScore }) => {
                 />
                 <text x="50%" y="50%" textAnchor="middle" fontSize={16}>
                     <tspan  x="55%" dy="0em" textAnchor="middle" fontSize="26px" fontWeight="bold">
-                    {`${radialChartData.todayScore}%`}
+                    {`${infoScore.todayScore}%`}
                     </tspan>
                     <tspan x="55%" dy="1.5em" textAnchor="middle" fontSize="16px" fill="#74798C" fontWeight={500}>
                     de votre

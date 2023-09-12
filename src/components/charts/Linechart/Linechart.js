@@ -1,10 +1,10 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Rectangle } from 'recharts';
-import { LineChartModel } from "@/models/LineChart_Model";
 import './linechart.css'
 
 
 const Linechart = ({ infoSessions }) => {
+
 
   if (!infoSessions || !infoSessions.sessions ) {
     // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
@@ -12,8 +12,8 @@ const Linechart = ({ infoSessions }) => {
   }
 
   // On récupère les données de l'API formatées grâce aux models 
-  const LineChartData = new LineChartModel(infoSessions);
-  const data = LineChartData.sessions;
+
+  const data = infoSessions.data;
 
 
   const CustomTooltip = ({ active, payload }) => {

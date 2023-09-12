@@ -2,7 +2,7 @@ class LineChartModel {
 
   constructor(data) {
 
-      this._data = data.sessions.map((session) => {
+      this.data = data.sessions.map((session) => {
           return {
               name: this.initDay(session.day),
               ...session,
@@ -11,7 +11,7 @@ class LineChartModel {
   }
 
   get sessions() {
-      return this._data;
+      return this.data;
   }
 
   initDay = (day) => {
