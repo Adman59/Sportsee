@@ -25,60 +25,80 @@ const Home = ({ userId }) => {
   const [userActivityData, setUserActivityData] = useState([]);
   const [userSessionsData, setUserSessionsData] = useState([]);
   const [activeUserId, setActiveUserId] = useState(userId);
+  const [useMockData, setUseMockData] = useState(false); // Nouvel état pour gérer les données simulées
+  const [showComponents, setShowComponents] = useState(true); // Nouvel état pour gérer la visibilité des composants enfants
 
   const fetchData = async (userId) => {
     try {
-      const userDataApi = await getUserDataFromApi(userId);
-      const userPerformanceDataApi = await getUserPerformanceDataFromApi(userId);
-      const userActivityDataApi = await getUserActivityDataFromApi(userId);
-      const userSessionsDataApi = await getUserSessionsDataFromApi(userId);
+      let userDataResult, userPerformanceDataResult, userActivityDataResult, userSessionsDataResult;
 
-      console.log(userActivityDataApi);
-
-      if (userDataApi) {
-        setUserData(userDataApi);
+      if (useMockData) {
+        userDataResult = await getUserDataFromMock(userId);
+        userPerformanceDataResult = await getUserPerformanceDataFromMock(userId);
+        userActivityDataResult = await getUserActivityDataFromMock(userId);
+        userSessionsDataResult = await getUserSessionsDataFromMock(userId);
       } else {
-        setUserData(getUserDataFromMock(userId));
+        userDataResult = await getUserDataFromApi(userId);
+        userPerformanceDataResult = await getUserPerformanceDataFromApi(userId);
+        userActivityDataResult = await getUserActivityDataFromApi(userId);
+        userSessionsDataResult = await getUserSessionsDataFromApi(userId);
       }
 
-      if (userPerformanceDataApi) {
-        setUserPerformanceData(userPerformanceDataApi);
+      if (userDataResult && userPerformanceDataResult && userPerformanceDataResult && userSessionsDataResult) {
+        setUserData(userDataResult);
+        setUserPerformanceData(userPerformanceDataResult);
+        setUserActivityData(userActivityDataResult);
+        setUserSessionsData(userSessionsDataResult);
+        setShowComponents(true); // Afficher les composants enfants si les données sont disponibles
       } else {
-        setUserPerformanceData(getUserPerformanceDataFromMock(userId));
-      }
-
-      if (userActivityDataApi) {
-        setUserActivityData(userActivityDataApi);
-      } else {
-        setUserActivityData(getUserActivityDataFromMock(userId));
-      }
-
-      if (userSessionsDataApi) {
-        setUserSessionsData(userSessionsDataApi);
-      } else {
-        setUserSessionsData(getUserSessionsDataFromMock(userId));
+        // Afficher le message d'erreur si les données ne sont pas disponibles
+        setUserData([]);
+        setUserPerformanceData([]);
+        setUserActivityData([]);
+        setUserSessionsData([]);
+        setShowComponents(false); // Masquer les composants enfants en cas d'échec
       }
     } catch (error) {
       console.error('Erreur lors de la récupération des données :', error);
+      setShowComponents(false); // Masquer les composants enfants en cas d'erreur
     }
   };
 
   useEffect(() => {
     fetchData(activeUserId);
-  }, [activeUserId]);
+  }, [activeUserId, useMockData]);
 
   const toggleUser = () => {
     setActiveUserId(activeUserId === '12' ? '18' : '12');
   };
 
+  const toggleMockData = () => {
+    setUseMockData(!useMockData);
+  };
+
   return (
     <div className="dashboard">
-      <Intro infoUser={userData} toggleUser={toggleUser} />
-      <Nutriments infoNutriments={userData} />
-      <Barchart infoActivity={userActivityData} />
-      <Linechart infoSessions={userSessionsData} />
-      <Radarchart infoPerf={userPerformanceData} />
-      <Radialbarchart infoScore={userData} /> 
+      {!showComponents ? (
+        // Afficher le message d'erreur si les composants enfants ne sont pas visibles
+        <div className="dashboard__error">
+          <h2>Le site n'a pas pu faire appel au serveur.</h2>
+          <p>Voulez-vous consulter le site grâce aux données simulées ?</p>
+          <button className="dashboard__error__switch__data" onClick={toggleMockData}>Utiliser les données simulées</button>
+        </div>
+      ) : (
+        // Afficher les composants enfants si visibles
+        <>
+          <Intro infoUser={userData} toggleUser={toggleUser} />
+          <Nutriments infoNutriments={userData} />
+          <Barchart infoActivity={userActivityData} />
+          <Linechart infoSessions={userSessionsData} />
+          <Radarchart infoPerf={userPerformanceData} />
+          <Radialbarchart infoScore={userData} />
+          <button className="dashboard__switch__data" onClick={toggleMockData}>
+            {useMockData ? 'Utiliser les données réelles' : 'Utiliser les données simulées'}
+          </button>
+        </>
+      )}
     </div>
   );
 };

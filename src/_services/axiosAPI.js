@@ -8,6 +8,7 @@ export const getUserDataFromApi = async (userId) => {
     try {
         const response = await axios.get(`http://localhost:3000/user/${userId}`);
         const formattedData = new RadialChartModel(response.data.data); // Utilisez la classe RadialChartModel pour formater les données
+        console.log(formattedData);
         return formattedData;
     } catch (error) {
         console.error(error);

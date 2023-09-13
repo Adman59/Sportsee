@@ -3,6 +3,8 @@ import './intro.css';
 
 const Intro = ({ infoUser, toggleUser }) => {
 
+    console.log(infoUser);
+
     if (!infoUser || !infoUser.firstName) {
         // Les données ne sont pas encore disponibles, retourner un état de chargement ou autre chose
         return <div>Erreur lors du chargement des données utilisateurs...</div>;

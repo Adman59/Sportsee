@@ -1,4 +1,5 @@
 .dashboard {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto 263px 263px;
@@ -30,6 +31,46 @@
 .title__chart {
   font-size: 15px;
   font-weight: 500;
+}
+
+.dashboard__error {
+  grid-area: dashboard__intro;
+  background-color: #FF0101;
+  border-radius: 8px;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+}
+
+.dashboard__intro__buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.dashboard__switch__data {
+  position: absolute;
+  right: 0;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard__error__switch__data {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard__switch__data:hover,
+.dashboard__error__switch__data:hover {
+  background-color: #020203;
+  color: #fff;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1200px) {
