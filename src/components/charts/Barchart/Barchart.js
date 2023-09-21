@@ -18,12 +18,6 @@ const Barchart = ({ infoActivity }) => {
 
     const data = infoActivity.sessions;
 
-    const formatDate = (date) => {
-        const formattedDate = new Date(date);
-        const day = formattedDate.getDate().toString();
-        return day;
-    };
-
     return (
         <div className="dashboard__barchart">
             <div className="dashboard__barchart__intro">
@@ -48,7 +42,7 @@ const Barchart = ({ infoActivity }) => {
                     />
                     <XAxis
                         dataKey="day"
-                        tickFormatter={formatDate}
+                        tickFormatter="day"
                         axisLine={{ stroke: "#DEDEDE", strokeWidth: 2 }}
                         tick={{ fill: "#9B9EAC" }}
                         tickLine={false}
